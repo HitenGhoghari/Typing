@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Test</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="card">
+        <div class="top-bar">
+            <div id="timer">60s</div>
+            <div class="controls">
+                <button id="theme-toggle">🌙 Dark</button>
+                <button id="sound-toggle">🔊 Sound</button>
+                <button id="restart-btn" class="primary">Restart</button>
+            </div>
+        </div>
+
+        <div class="mode-bar">
+            <div class="mode-group">
+                <button class="mode-btn active" data-mode="time">⏱ Time</button>
+                <button class="mode-btn" data-mode="pages">📄 Pages</button>
+            </div>
+            <div class="divider"></div>
+
+            <div class="value-group" id="time-values">
+                <button class="val-btn active" data-value="60">1 min</button>
+                <button class="val-btn" data-value="120">2 min</button>
+                <button class="val-btn" data-value="180">3 min</button>
+                <button class="val-btn" data-value="300">5 min</button>
+                <div class="custom-wrap">
+                    <input type="text" class="custom-input" id="time-input"
+                           placeholder="Enter minutes" inputmode="numeric" autocomplete="off">
+                    <button class="custom-set" id="time-set-btn">Set</button>
+                </div>
+                <div class="custom-hint" id="time-hint">Enter a number between 1 and 30.</div>
+            </div>
+
+            <div class="value-group hidden" id="page-values">
+                <button class="val-btn active" data-value="1">1 page</button>
+                <button class="val-btn" data-value="2">2 pages</button>
+                <button class="val-btn" data-value="3">3 pages</button>
+                <button class="val-btn" data-value="5">5 pages</button>
+                <div class="custom-wrap">
+                    <input type="text" class="custom-input" id="pages-input"
+                           placeholder="Enter pages" inputmode="numeric" autocomplete="off">
+                    <button class="custom-set" id="pages-set-btn">Set</button>
+                </div>
+                <div class="custom-hint" id="pages-hint">Enter a number between 1 and 10.</div>
+            </div>
+        </div>
+
+        <div class="progress-wrap" id="progress-wrap">
+            <span id="page-label">Page 0/1</span>
+            <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+            <span id="percent-label">0%</span>
+        </div>
+
+        <div id="loading">
+            <div class="spinner"></div>
+            <span id="loading-text">Generating a fresh passage...</span>
+        </div>
+
+        <div class="text-viewport" id="text-viewport" tabindex="0">
+            <div class="text-scroll" id="text-scroll">
+                <div class="text-content" id="word-display"></div>
+            </div>
+            <div id="tooltip">Start Typing!</div>
+        </div>
+    </div>
+
+    <div class="results-overlay" id="results-overlay">
+        <div class="results-panel">
+            <div class="results-header">
+                <h2>Test Complete</h2>
+                <div class="results-mode-tag" id="res-mode-tag">1 min · Time</div>
+            </div>
+
+            <div class="results-grid">
+                <div class="stat-card primary">
+                    <div class="stat-value" id="res-wpm">0</div>
+                    <div class="stat-label">WPM</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="res-cpm">0</div>
+                    <div class="stat-label">CPM</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="res-accuracy">0%</div>
+                    <div class="stat-label">Accuracy</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="res-time">0s</div>
+                    <div class="stat-label">Time</div>
+                </div>
+            </div>
+
+            <div class="results-details">
+                <div class="detail-row">
+                    <span class="detail-label">Characters</span>
+                    <span class="detail-value">
+                        <span class="correct-stat" id="res-correct">0</span> correct ·
+                        <span class="incorrect-stat" id="res-wrong">0</span> incorrect
+                    </span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Words typed</span>
+                    <span class="detail-value" id="res-words">0</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Most mistaken</span>
+                    <div class="mistake-chips" id="res-mistakes"></div>
+                </div>
+            </div>
+
+            <div class="results-actions">
+                <button class="primary" id="res-again-btn">Try Again</button>
+                <button id="res-close-btn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
